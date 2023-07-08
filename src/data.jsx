@@ -12,13 +12,13 @@ import cartImage4 from "./assets/images/cart-item-4.png";
 const menu = [
   {
     id: "menu_1",
-    name: "cake",
+    name: "Burger",
     price: "20.89",
     img: menuImage1,
   },
   {
     id: "menu_2",
-    name: "bars",
+    name: "Finger fries",
     price: "10.50",
     img: menuImage2,
   },
@@ -30,7 +30,7 @@ const menu = [
   },
   {
     id: "menu_4",
-    name: "sweet rolls",
+    name: "Pizza",
     price: "35.67",
     img: menuImage4,
   },

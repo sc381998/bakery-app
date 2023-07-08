@@ -1,11 +1,14 @@
-import React, { useRef } from 'react'
-import Logo from "../assets/images/logo.png"
-import { cart } from '../data';
+import React, { useEffect, useRef } from 'react'
+import Logo from "../assets/images/bakeryLogo.jpg"
+import { menu } from '../data';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromCart } from '../actions';
 
 function Navbar() {
   const cartRef = useRef();
   const navbarRef = useRef();
-
+  const dispatch = useDispatch();
+  const selectedData = useSelector(state => state.cartData.selectedData)
   const navbarHandler = () => {
     navbarRef.current.classList.toggle("active");
     cartRef.current.classList.remove("active");
@@ -14,6 +17,8 @@ function Navbar() {
     cartRef.current.classList.toggle("active");
     navbarRef.current.classList.remove("active");
   };
+
+  const updatedCart = menu.filter(ele => selectedData.includes(ele.id))
   return (
     <header className='header'>
       <a href='#' className='logo'>
@@ -32,6 +37,7 @@ function Navbar() {
             id="cart-btn"
             onClick={cartHandler}
           ></div>
+          <span style={{fontSize: "20px", color: "#ffc107"}}>{updatedCart.length}</span>
           <div
             className="fas fa-bars"
             id="menu-btn"
@@ -39,16 +45,19 @@ function Navbar() {
           ></div>
         </div>
         <div className="cart-items-container" ref={cartRef}>
-          {cart.map((item, index) => (
-            <div className="cart-item" key={index * Math.random()}>
-              <span className="fas fa-times"></span>
+          {updatedCart.length ? 
+          updatedCart.map(item => (
+            <div className="cart-item" key={item.id}>
+              <span className="fas fa-times" onClick={() => dispatch(removeFromCart(item.id))}></span>
               <img src={item.img} alt="" />
               <div className="content">
-                <h3>cart item 01</h3>
-                <div className="price">$15.99/-</div>
+                <h3>{item.name}</h3>
+                <div className="price">{item.price}</div>
               </div>
             </div>
-          ))}
+          )) : 
+            <div className='empty-cart'>Your cart is empty</div>
+          }
           <a href="#" className="btn">
             checkout now
           </a>

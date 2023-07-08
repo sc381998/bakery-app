@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { menu } from '../data'
+import { connect, useDispatch, useSelector } from 'react-redux'
+import { addToCart, removeFromCart } from "../actions";
 
 export const Products = (props) => {
-    const onAddToCart = () => {
-        console.log("sfknskc")
+    const dispatch = useDispatch();
+    const selectedData = useSelector(state => state.cartData.selectedData)
+    const onAddToCart = (id) => {
+        dispatch(addToCart(id))
     }
+    const onRemoveFromCart = (id) => {
+        dispatch(removeFromCart(id))
+    }
+   
     return (
         <section style={{ marginTop: "10rem" }}>
             <h1 className='heading'>
@@ -17,7 +25,10 @@ export const Products = (props) => {
                             <img src={item.img} alt="" />
                             <h3>{item.name}</h3>
                             <div className='price'>{item.price}</div>
-                            <a href="#" className='btn' onClick={onAddToCart}>Add to Cart</a>
+                            {selectedData.includes(item.id) ? 
+                            <a href="#" className='btn' onClick={() => onRemoveFromCart(item.id)}>Remove from Cart</a> :
+                            <a href="#" className='btn' onClick={() => onAddToCart(item.id)}>Add to Cart</a>
+                            }
                         </div>
                     ))
                 }
@@ -25,5 +36,5 @@ export const Products = (props) => {
         </section>
     )
 }
-
-export default Products
+  
+export default Products;
