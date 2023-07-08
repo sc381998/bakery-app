@@ -79,6 +79,7 @@ section {
   left: 0;
   right: 0;
   z-index: 1000;
+  background: white;
 }
 
 .header .logo img {
@@ -505,7 +506,7 @@ section {
   width: 5rem;
   line-height: 5rem;
   font-size: 2rem;
-  color: black;
+  color: white;
   border: 0.2rem solid #ffc107;
   margin: 0.3rem;
   border-radius: 50%;
@@ -525,7 +526,7 @@ section {
 
 .footer .links a {
   padding: 0.7rem 2rem;
-  color: black;
+  color: white;
   border: 0.2rem solid #ffc107;
   font-size: 2rem;
 }
@@ -536,7 +537,7 @@ section {
 
 .footer .credit {
   font-size: 2rem;
-  color: black;
+  color: white;
   font-weight: lighter;
   padding: 1.5rem;
 }
